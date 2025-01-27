@@ -37,6 +37,12 @@ class SpreadsheetSpreadsheet(models.Model):
         string="Readers",
     )
 
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        help="If set, the spreadsheet will be available only"
+        " if this company is in the current companies.",
+    )
+
     @api.depends("name")
     def _compute_filename(self):
         for record in self:
