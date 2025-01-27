@@ -36,7 +36,9 @@
         <field name="name">Spreadsheet Contributor</field>
         <field name="model_id" ref="model_spreadsheet_spreadsheet" />
         <field name="groups" eval="[(4, ref('spreadsheet_oca.group_user'))]" />
-        <field name="domain_force">[('contributor_ids','=', user.id)]</field>
+        <field
+            name="domain_force"
+        >['|', ('contributor_ids','=', user.id), ('contributor_group_ids','in', user.groups_id.ids)]</field>
         <field name="perm_create" eval="False" />
         <field name="perm_unlink" eval="False" />
     </record>
@@ -44,7 +46,9 @@
         <field name="name">Spreadsheet Reader</field>
         <field name="model_id" ref="model_spreadsheet_spreadsheet" />
         <field name="groups" eval="[(4, ref('spreadsheet_oca.group_user'))]" />
-        <field name="domain_force">[('reader_ids','=', user.id)]</field>
+        <field
+            name="domain_force"
+        >['|', ('reader_ids','=', user.id), ('reader_group_ids','in', user.groups_id.ids)]</field>
         <field name="perm_write" eval="False" />
         <field name="perm_create" eval="False" />
         <field name="perm_unlink" eval="False" />
